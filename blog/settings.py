@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-kmv==%sm#vsq(b-mk70y1^0)j3&66s-m*qc98f@fl2-gjgpu9x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['firstwebdjblogapp.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = []
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # Application definition
