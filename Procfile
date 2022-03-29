@@ -1,1 +1,1 @@
-web:gunicorn blog.wsgi --preload -
+web:gunicorn --pythonpath app app.wsgi
