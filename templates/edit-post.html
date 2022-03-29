@@ -1,0 +1,35 @@
+{%extends 'main.html'%}
+{% block title %}
+Update Post
+{% endblock %}
+
+
+{%block content%}
+<style>
+	div.container{
+		display: flex;
+		flex-direction: column;
+		background: chocolate;
+		color: black;
+		width: 60%;
+		margin: 10px;
+	}
+</style>
+{%if user.is_authenticated%}
+
+		<h1>Update Post</h1>
+		<a href="{%url 'create'%}">create Post</a>
+		<a href="{%url 'show-post'%}">See All Post</a>
+		<form method="POST" enctype = 'multipart/form-data'>
+			{%csrf_token%}
+			{{form.media}}
+			{{form.as_p}}
+			<button type="submit">Update</button>
+		</form>
+
+{%else%}
+	<a href="{%url 'login' %}">Login First</a>
+{%endif%}
+
+
+{%endblock%}

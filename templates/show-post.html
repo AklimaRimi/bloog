@@ -1,0 +1,51 @@
+ {%extends 'main.html'%}
+{% block title %}
+Show-book
+{% endblock %}
+
+
+{%block content%}
+<style>
+	div.container{
+		display: flex;
+		flex-direction: column;
+		background: chocolate;
+		color: black;
+		width: 100%;
+		margin: 10px;
+	}
+</style>
+{%if user.is_authenticated%}
+<div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Actions
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+  	<a class="dropdown-item" href="{% url 'showprofile' user.id %}">showprofile</a>
+  	<a class="dropdown-item" href="{% url 'room' user.id %}">chat</a>
+    <a class="dropdown-item" href="{%url 'create' %}">Add Post</a>
+    <a class="dropdown-item" href="{%url 'logout' %}">LogOut</a>
+  </div>
+{%endif%}
+</div>
+<h1>Today's Post</h1>
+<div class="wrap">
+	{% for post in object_list %}
+		<div class="container">
+			<strong>@ {{post.author}} - {{post.created |timesince}} ago</strong>
+			<a href="{%url 'show-one' post.id%}"><h3>{{post.title}} </h3></a>
+		<br>
+
+			{%if user == post.author%}
+				<a href="{%url 'update' post.id%}">Update?</a>
+				<a href="{%url 'delete' post.id%}">Delete?</a>
+			{%endif%}
+		</div>
+
+	{%endfor%}
+
+
+
+</div>
+{%endblock%}

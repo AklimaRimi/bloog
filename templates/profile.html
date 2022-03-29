@@ -1,0 +1,25 @@
+{%extends 'main.html'%}
+{% block title %}
+Show-one
+{% endblock %}
+
+
+{%block content%}
+<style>
+	div.container{
+		display: flex;
+		flex-direction: column;
+		background: chocolate;
+		color: black;
+		width: 60%;
+		margin: 10px;
+	}
+</style>
+<p>Profile..</p>
+<p><strong>Name:</strong> {{user}}<br></p>
+<p><strong>Email: </strong>{{user.email}}<br></p>
+<p><strong>Password: </strong>{{user.password}}</p>
+
+<button><a href="{%url 'edit-profile' user.id %}">Edit profile</a></button>
+<button><a href="{%url 'show-post'%}">Back</a></button>
+{%endblock%}

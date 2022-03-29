@@ -1,0 +1,44 @@
+{%extends 'main.html' %}
+
+{%block title%}
+Room
+{%endblock%}
+
+{%block content%}
+<style>
+	.room-container{
+		display: grid;
+		grid-template-columns: 2fr 3fr;
+	}
+	
+
+
+</style>
+<div class="wrap">
+<div >
+	<p>Participants Active {{participants.count}}</p><br>
+	{%for participant in participants %}
+	    {{participant.username}}
+	{%endfor%}
+</div><hr>
+<div>
+	<h3> Discussion on {{room.topic}}</h3>
+	<h4> Hosted by {{room.username}}</h4>
+
+	{%for message in room_messages%}
+		<p>{{message.user.username}} | {{message.created|timesince}} ago</p>
+		<p>{{message.body}}</p>
+		<hr>	
+	{%endfor%}
+	
+</div>
+
+</div>
+<form action="" method="POST" enctype = 'multipart/form-data'>
+		{%csrf_token%}
+		<input type="text" name="body" placeholder="Message">
+	</form>
+	<a href="{%url 'show-one' post.id %}">Back</a>
+
+
+{%endblock%}

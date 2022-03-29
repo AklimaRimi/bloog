@@ -1,0 +1,50 @@
+{%extends 'main.html'%}
+{% block title %}
+Login
+{% endblock %}
+
+
+{%block content%}
+<style>
+	div.container{
+		display: flex;
+		flex-direction: column;
+		background: chocolate;
+		color: black;
+		width: 60%;
+		margin: 10px;
+		justify-content: center;
+		align-items: center;
+		padding: 5px;
+		margin: 20px;
+	}
+	input{
+		margin: 10px;
+	}
+	button{
+		border-radius: 30px;
+		cursor: pointer;
+		border: 0px;
+	}
+	button:hover{
+		background: dodgerblue;
+	}
+
+</style>
+<h1>Login Page</h1>
+
+<div class="container">
+	<form method="POST">
+		{%csrf_token%}
+		<input type="text" placeholder="Username" name="username"><br>
+		<input type="password" placeholder="Password" name="password"><br>
+		<button type="submit">LogIn</button>
+	</form>
+	 	
+</div>
+<a href="{% url 'registration' %}">Sign In</a>
+
+
+
+
+{%endblock%}

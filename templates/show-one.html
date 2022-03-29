@@ -1,0 +1,78 @@
+{%extends 'main.html'%}
+{% load static %}
+{% block title %}
+Show-one
+{% endblock %}
+
+
+{%block content%}
+<style>
+	div.container{
+		display: flex;
+		flex-direction: column;
+		background: chocolate;
+		color: black;
+		width: 60%;
+		margin: 10px;
+	}
+	button{
+		width: 70px;
+		height: 50px;
+	}
+</style>
+
+	<h1>Detailed Post</h1>
+{% if user.is_authenticated %}
+	<a href="{%url 'create'%}">create Post</a>
+{%endif%}
+	<a href="{%url 'show-post'%}">See All Post</a>
+
+	<div class="wrap">	
+	<div class="container">
+		<strong>@ {{post.author}} - {{post.created |timesince}} ago</strong>
+		<h3>{{post.title}}</h3>
+		<h4>{{post.detail | safe}}</h4>
+		<img src="{{post.img.url}}" alt="">
+		
+
+		<form action="{%url 'likeview' post.id %}" method="POST">
+			{%csrf_token%}
+			{%if liked%}
+				<button type="submit" name="post_id" value="{{post.id}}" style="background:rgb(69, 18, 6);">Unlike</button>
+			{%else%}
+				<button type="submit" type="image/png" name="post_id" value="{{post.id}}" style="background:rgb(6, 69, 44) ;" >
+						Like
+				</button>
+			{%endif%}
+			<li>{{total_likes}} likes</li>
+		</form>
+		<br>
+		<h2>Comments..</h2>
+		<div>
+			{% if not post.comments.all%}
+				<p>No Comment</p>
+			{%else%}
+				{%for comment in post.comments.all%}
+					<p>{{comment.name}} : {{comment.date|timesince}} ago{{comment.body|safe}}  <br></p>
+					<hr>
+					
+				{%endfor%}
+			{%endif%}
+			
+		</div>
+			<a href="{%url 'comment' post.pk%}">leave a comment....</a>
+
+{%if user.is_authenticated%}
+
+		{%if user == post.author%}
+			<h3><a href="{%url 'update' post.id%}">Update</a></h3>	
+			<h3><a href="{%url 'delete' post.id%}">Delete</a></h3>
+		{%endif%}
+	</div>
+{%else%}
+
+	<a href="{%url 'login' %}">Login First For Chat</a>
+{%endif%}
+</div>
+
+{%endblock%}

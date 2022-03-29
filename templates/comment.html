@@ -1,0 +1,30 @@
+{%extends 'main.html'%}
+{% block title %}
+Comment
+{% endblock %}
+
+
+{%block content%}
+<style>
+	div.container{
+		display: flex;
+		flex-direction: column;
+		background: chocolate;
+		color: black;
+		width: 60%;
+		margin: 10px;
+	}
+</style>
+
+
+<h1>Comment</h1>
+<form method="POST" enctype = 'multipart/form-data'>
+	{%csrf_token%}
+	{{form.media}}
+	{{form.as_p}}
+	<button type="submit">Share</button>
+</form>
+
+
+
+{%endblock%}
